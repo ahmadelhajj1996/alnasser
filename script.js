@@ -35,6 +35,7 @@ const translations = {
     aboutTitle: "About Our Firm",
     aboutText1:
       "Founded in 2001, Justice Law Firm has been providing exceptional legal services to clients throughout the region. Our team of experienced attorneys is dedicated to achieving the best possible outcomes for our clients.",
+    aboutQuestion: "Why Choose Al Nasser Legal ?",
     aboutText2:
       "We believe in a client-centered approach, ensuring that you receive personalized attention and clear communication throughout your case.",
     aboutListItem1: "20+ Years of Combined Experience",
@@ -55,16 +56,31 @@ const translations = {
     phone: "(212) 555-1234",
     email: "info@justicelaw.com",
     hours: "Monday - Friday: 9am - 6pm<br>Saturday: By appointment",
+    aboutUs: "About Us",
+    aboutHeader:
+      "  With over 20 years of dedicated legal practice, Al Nasser Legal  brings unmatched expertise and a proven track record of success to every case. our firm is committed to delivering strategic, results-driven representation tailored to each client’s unique needs. ",
+    aboutQuestion: "Why Choose Al Nasser Legal ?",
 
-    // Form
-    namePlaceholder: "Your Name",
-    emailPlaceholder: "Your Email",
-    phonePlaceholder: "Your Phone",
-    servicePlaceholder: "Select Service",
-    messagePlaceholder: "Briefly describe your legal issue",
-    submitButton: "Request Consultation",
+    aboutListItem1: "20+ Years of Legal Excellence",
+    aboutListItem2: "Client-Focused Approach",
+    aboutListItem3: "Proven Results",
 
     newsletterPlaceholder: "Your Email",
+    footerServices: "Services",
+    criminalLaw: "Criminal Law",
+    familyLaw: "Family Law",
+    businessLaw: "Business Law",
+    realEstate: "Real Estate",
+    personalInjury: "Personal Injury",
+    newsletterTitle: "Newsletter",
+    officeAddress: "Office Address",
+    addressLine1: "Faisal King Street",
+    addressLine3: "Ajman, UAE",
+    phoneLabel: "+971 5 888 18425",
+    emailLabel: "info@alnasserlegal.com",
+    copyright: "&copy; 2023 Justice Law Firm. All Rights Reserved.",
+    privacyPolicy: "Privacy Policy",
+    termsOfService: "Terms of Service",
   },
   ar: {
     home: "الرئيسية",
@@ -99,6 +115,8 @@ const translations = {
     aboutTitle: "عن شركتنا",
     aboutText1:
       "تأسست شركة جستس للمحاماة عام 2001، وقد قدمت خدمات قانونية استثنائية للعملاء في جميع أنحاء المنطقة. فريقنا من المحامين ذوي الخبرة مكرس لتحقيق أفضل النتائج الممكنة لعملائنا.",
+    aboutQuestion: "لماذا تختار مكتب الناصر ؟",
+
     aboutText2:
       "نؤمن بنهج يركز على العميل، مما يضمن حصولك على اهتمام شخصي وتواصل واضح طوال قضيتك.",
     aboutListItem1: "20+ سنة من الخبرة المشتركة",
@@ -118,15 +136,32 @@ const translations = {
     phone: "(212) 555-1234",
     email: "info@justicelaw.com",
     hours: "الإثنين - الجمعة: 9 صباحًا - 6 مساءً<br>السبت: حسب الموعد",
-
-    namePlaceholder: "اسمك",
-    emailPlaceholder: "بريدك الإلكتروني",
-    phonePlaceholder: "هاتفك",
-    servicePlaceholder: "اختر الخدمة",
-    messagePlaceholder: "صف بإيجاز مشكلتك القانونية",
-    submitButton: "طلب استشارة",
-
+    aboutUs: "حول خدماتنا ",
+    aboutHeader:
+      "  مع أكثر من 20 عامًا من الممارسة القانونية المخصصة، يجلب مكتب الناصر القانوني خبرة لا مثيل لها وسجلًا حافلًا بالنجاح في كل قضية. يلتزم مكتبنا  بتقديم تمثيل استراتيجي مدفوع بالنتائج مصمم خصيصًا لتلبية الاحتياجات الفريدة لكل عميل. ",
+    aboutListItem1: "20+ سنة من التميز القانوني",
+    aboutListItem2: "نهج يركز على العميل",
+    aboutListItem3: "نتائج مثبتة",
+    footerServices: "الخدمات",
+    criminalLaw: "القانون الجنائي",
+    familyLaw: "قانون الأسرة",
+    businessLaw: "قانون الأعمال",
+    realEstate: "العقارات",
+    personalInjury: "الإصابات الشخصية",
+    newsletterTitle: "النشرة الإخبارية",
+    newsletterText:
+      "اشترك في نشرتنا الإخبارية للحصول على التحديثات القانونية وأخبار الشركة.",
+    copyright:
+      "&copy; 2025 مكتب الناصر للاستشارات القانونية. جميع الحقوق محفوظة.",
+    privacyPolicy: "سياسة الخصوصية",
+    termsOfService: "شروط الخدمة",
     newsletterPlaceholder: "بريدك الإلكتروني",
+    officeAddress: "عنوان المكتب",
+    addressLine1: " شارع الملك فيصل",
+    addressLine2: "",
+    addressLine3: " عجمان , الإمارات العربية المتحدة",
+    phoneLabel: "971588818425+",
+    emailLabel: "info@alnasserlegal.com",
   },
 };
 
@@ -135,13 +170,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const htmlElement = document.documentElement;
   const langText = document.querySelector(".lang-text");
 
+
+  // With this new code:
   const savedLang = localStorage.getItem("preferredLang");
   const browserLang = navigator.language || navigator.userLanguage;
 
-  if (savedLang === "ar" || (!savedLang && browserLang.startsWith("ar"))) {
-    setArabic();
+  // Force Arabic as default on first run
+  if (savedLang) {
+    // If there's a saved preference, use it
+    if (savedLang === "ar") {
+      setArabic();
+    } else {
+      setEnglish();
+    }
   } else {
-    setEnglish();
+    // First run - default to Arabic
+    setArabic();
   }
 
   langSwitcher.addEventListener("click", function () {
@@ -171,7 +215,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateTextContent(lang) {
     const langData = translations[lang];
 
-    
     document.querySelectorAll(".navbar a")[0].textContent = langData.home;
     document.querySelectorAll(".navbar a")[1].textContent = langData.services;
     document.querySelectorAll(".navbar a")[2].textContent = langData.about;
@@ -183,10 +226,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".home-content h1").textContent = langData.heroTitle;
     document.querySelector(".home-content p").textContent =
       langData.heroSubtitle;
-      document.querySelector(".whatsapp-btn span").textContent =
-        langData.ctaButton;
-      document.querySelector(".call-btn span").textContent =
-        langData.callButton;
+    document.querySelector(".whatsapp-btn span").textContent =
+      langData.ctaButton;
+    document.querySelector(".call-btn span").textContent = langData.callButton;
 
     document.querySelector(".services .section-title").textContent =
       langData.servicesTitle;
@@ -208,16 +250,59 @@ document.addEventListener("DOMContentLoaded", function () {
     serviceCards[5].querySelector("h3").textContent = langData.estatePlanning;
     serviceCards[5].querySelector("p").textContent = langData.estateDesc;
 
-
     document.querySelector(".testimonials .section-title").textContent =
       langData.testimonialsTitle;
     document.querySelector(".testimonials .section-subtitle").textContent =
       langData.testimonialsSubtitle;
 
+    document.querySelector(".about-text h2").textContent = langData.aboutUs;
+    document.querySelector(".about-question").textContent =
+      langData.aboutQuestion;
 
+    document.querySelector(".about-text p").textContent = langData.aboutHeader;
+    const aboutListItems = document.querySelectorAll(".about-list li");
+    aboutListItems[0].textContent = langData.aboutListItem1;
+    aboutListItems[1].textContent = langData.aboutListItem2;
+    aboutListItems[2].textContent = langData.aboutListItem3;
+    document.querySelector(".footer-col h3").textContent =
+      langData.footerServices;
 
-    document.querySelector(".newsletter-form input").placeholder =
-      langData.newsletterPlaceholder;
+    const serviceLinks = document.querySelectorAll(".footer-col ul li a");
+    serviceLinks[0].textContent = langData.criminalLaw;
+    serviceLinks[1].textContent = langData.familyLaw;
+    serviceLinks[2].textContent = langData.businessLaw;
+    serviceLinks[3].textContent = langData.realEstate;
+    serviceLinks[4].textContent = langData.personalInjury;
+
+    const newsletterCol = document.querySelectorAll(".footer-col")[1];
+    // newsletterCol.querySelector("h3").textContent = langData.newsletterTitle;
+    // newsletterCol.querySelector("p").textContent = langData.newsletterText;
+
+    document.querySelector(".footer-bottom p").innerHTML = langData.copyright;
+
+    const legalLinks = document.querySelectorAll(".legal-links a");
+    legalLinks[0].textContent = langData.privacyPolicy;
+    legalLinks[1].textContent = langData.termsOfService;
+
+    // Update newsletter placeholder if it exists
+    const newsletterInput = document.querySelector(".newsletter-form input");
+    if (newsletterInput) {
+      newsletterInput.placeholder = langData.newsletterPlaceholder;
+    }
+    const footerCols = document.querySelectorAll(".footer-col");
+    const addressCol = footerCols[footerCols.length - 1]; // Assuming address is last footer-col
+
+    if (addressCol) {
+      addressCol.querySelector("h3").textContent = langData.officeAddress;
+      const addressLines = addressCol.querySelectorAll("address p");
+      addressLines[0].innerHTML = `<i class="fas fa-map-marker-alt"></i> ${langData.addressLine1}`;
+      addressLines[1].textContent = langData.addressLine2;
+      addressLines[2].textContent = langData.addressLine3;
+      addressLines[3].innerHTML = `<i class="fas fa-phone"></i> ${langData.phoneLabel}`;
+      addressLines[4].innerHTML = `<i class="fas fa-envelope"></i> ${langData.emailLabel}`;
+    }
+    // document.querySelector(".newsletter-form input").placeholder =
+    //   langData.newsletterPlaceholder;
   }
 
   const menuBtn = document.querySelector(".menu-btn");
@@ -309,7 +394,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 5000);
   });
 
- 
   // Animation on Scroll
   function animateOnScroll() {
     const elements = document.querySelectorAll(
